@@ -1,15 +1,19 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Rating } = require("../models");
 const { signToken } = require("../utils/auth");
 
 // Map resolvers to query on typedefs
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate("ratings");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username });
+      return User.findOne({ username }).populate("ratings");
+    },
+    ratings: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Rating.find(params).sort({ createdAt: -1 });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -19,7 +23,7 @@ const resolvers = {
     },
   },
 
-  // Map mutations to muations on typedefs
+  // Map mutations to mutations on typedefs
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
@@ -43,6 +47,22 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addrating: async (parent, { value }, context) => {
+      if (context.user) {
+        const rating = await Rating.create({
+          value,
+          user: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { ratings: rating._id } }
+        );
+
+        return thought;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };
