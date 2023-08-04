@@ -11,10 +11,10 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("ratings");
     },
-    ratings: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Rating.find(params).sort({ createdAt: -1 });
-    },
+    // ratings: async (parent, { username }) => {
+    //   const params = username ? { username } : {};
+    //   return Rating.find(params).sort({ createdAt: -1 });
+    // },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
