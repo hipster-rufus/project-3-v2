@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 const ratingSchema = new Schema({
   value: {
@@ -14,6 +15,6 @@ const ratingSchema = new Schema({
   },
 });
 
-const Rating = mongoose.model("Rating", ratingSchema);
+const Rating = model("Rating", ratingSchema);
 
 module.exports = Rating;
