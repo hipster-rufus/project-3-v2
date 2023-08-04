@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
-export default function Signup () {
+export default function Signup() {
   const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -29,10 +29,12 @@ export default function Signup () {
       const { data } = await addUser({
         variables: { ...formState },
       });
+      console.log("Mutation Data:", data);
 
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
+      console.error("Mutation Error:", e);
     }
   };
 
@@ -43,9 +45,7 @@ export default function Signup () {
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
             {data ? (
-              <p>
-                Success! Welcome to our site :)
-              </p>
+              <p>Success! Welcome to our site :)</p>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
@@ -74,7 +74,7 @@ export default function Signup () {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit
@@ -89,10 +89,10 @@ export default function Signup () {
             )}
           </div>
         </div>
-        <p>Already have an account?{' '}
-            <Link to="/login">Click here to login.</Link>
+        <p>
+          Already have an account? <Link to="/login">Click here to login.</Link>
         </p>
       </div>
     </main>
   );
-};
+}
