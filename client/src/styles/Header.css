@@ -1,0 +1,23 @@
+header {
+    background: rgb(234, 173, 18);
+}
+
+.header-title {
+    color: white;
+    font-variant: small-caps;
+}
+
+.header-text {
+    color: white;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: rgb(99, 71, 0);
+    font-size: 18pt;
+}
+
+.nav-item:hover {
+    text-decoration: none;
+    color: white !important;
+}
