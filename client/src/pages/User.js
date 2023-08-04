@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import CommentList from '../components/CommentsList'
+// import RatingsList from '../components/RatingsList'
 import Auth from '../utils/auth';
 
 export default function User () {
@@ -32,19 +32,22 @@ export default function User () {
   return (
     <div>
       <div className="flex-row justify-center mb-3">
-        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Welcome, {userParam ? `${user.username}'s` : 'your'}!
+        <h2 className="col-12 col-md-10 mb-5">
+          Welcome to {userParam ? `${user.username}'s` : 'your'} page!
         </h2>
-
         <div className="col-12 col-md-10 mb-5">
-          <CommentList
-            comments={user.comments}
-            title={`${user.username}'s comments`}
-            showTitle={false}
-            showUsername={false}
-          />
+          <p>No ratings yet.</p>
         </div>
       </div>
     </div>
   );
 };
+
+
+
+          // <RatingsList
+          //   ratings={user.ratings}
+          //   title={`${user.username}'s ratings`}
+          //   showTitle={false}
+          //   showUsername={false}
+          // />

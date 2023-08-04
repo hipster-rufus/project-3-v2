@@ -24,13 +24,13 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_COMMENT = gql`
-  mutation addComment($commentText: String!) {
-    addComment(commentText: $commentText) {
-      _id
-      commentText
-      commentUser
-      createdAt
-    }
-  }
-`;
+// export const ADD_RATING = gql`
+//   mutation addRating($ratingText: Int!) {
+//     addRating(ratingText: $ratingText) {
+//       _id
+//       ratingText
+//       ratingUser
+//       createdAt
+//     }
+//   }
+// `;
