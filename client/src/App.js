@@ -7,8 +7,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import User from './pages/User';
+import Breweries from './pages/Breweries';
 import Brewery from './pages/Brewery';
-import Comment from './pages/Comment';
+// import Rating from './pages/Rating';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import Header from './components/Header';
@@ -61,13 +62,17 @@ function App() {
                 element={<User />} 
               />
               <Route
+                path="/breweries"
+                element={<Breweries />}
+              />
+              <Route
                 path="/breweries/:breweryId"
                 element={<Brewery />}
               />
-              <Route 
-                path="/comments/:commentId"
-                element={<Comment />}
-              />
+              {/* <Route 
+                path="/ratings/:ratingId"
+                element={<Rating />}
+              /> */}
               <Route 
                 path="/aboutus"
                 element={<AboutUs />}

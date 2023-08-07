@@ -19,6 +19,9 @@ export default function Header () {
             <Link className="nav-item m-2" to="/">
                 Home
             </Link>
+            <Link className="nav-item m-2" to="/breweries">
+                Breweries
+            </Link>
             <Link className="nav-item m-2" to="/aboutus">
                 About Us
             </Link>
