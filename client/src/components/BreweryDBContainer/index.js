@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import SearchForm from '../SearchForm';
 import SearchList from '../SearchList';
 import API from '../../utils/API';
+import '../../styles/Card.css';
 
 export default function BreweryDBContainer () {
     const [result, setResult] = useState({});
-    const [select, setSelect] = useState('');
+    const [search, setSearch] = useState('');
   
     const searchBrewery = (query) =>
       API.search(query)
@@ -18,30 +19,31 @@ export default function BreweryDBContainer () {
       searchBrewery('Colorado');
     }, []);
 
-    const handleSelectChange = (e) => setSelect(e.target.option);
+    const handleInputChange = (e) => setSearch(e.target.value);
   
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      searchBrewery(select);
+      searchBrewery(search);
     };
   
     const {
-        id = '',
-        name = '',
-        street = '',
-        city = '',
-        state = '',
-        postal_code = '',
-        phone = '',
-        website_url = '',
+      id = '',
+      name = '',
+      street = '',
+      city = '',
+      state = '',
+      postal_code = '',
+      phone = '',
+      website_url = '',
     } = result;
   
     return (
-      <div className='container'>
-            <div>
+      <div>
+        <h1>Breweries</h1>
+            <div className='form-card'>
               <SearchForm
-                value={select}
-                handleInputChange={handleSelectChange}
+                value={search}
+                handleInputChange={handleInputChange}
                 handleFormSubmit={handleFormSubmit}
               />
             </div>
@@ -58,7 +60,7 @@ export default function BreweryDBContainer () {
                     website_url={website_url}
                 />
               ) : (
-                <h3>No Results to Display</h3>
+                <h3>No Results to display</h3>
               )}
             </div>
       </div>

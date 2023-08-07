@@ -2,6 +2,7 @@ import React from 'react';
 // import { useQuery } from '@apollo/client';
 // import RatingsList from '../components/RatingsList';
 // import { QUERY_RATINGS } from '../utils/queries';
+import '../styles/Card.css';
 
 export default function Home () {
   // const { loading, data } = useQuery(QUERY_RATINGS);
@@ -9,8 +10,8 @@ export default function Home () {
 
   return (
     <main>
-      <div className="flex-row justify-center">
-        <div className="col-12 col-md-8 mb-3">
+      <h1>Welcome to BrewFly!</h1>
+      <div className="intro-card">
           {/* {loading ? (
             <div>Loading...</div>
           ) : (
@@ -20,8 +21,6 @@ export default function Home () {
             // />
             
           )} */}
-          <p>Hello!</p>
-        </div>
       </div>
     </main>
   );
