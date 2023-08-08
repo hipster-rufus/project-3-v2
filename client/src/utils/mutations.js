@@ -24,13 +24,15 @@ export const ADD_USER = gql`
   }
 `;
 
-// export const ADD_RATING = gql`
-//   mutation addRating($ratingText: Int!) {
-//     addRating(ratingText: $ratingText) {
-//       _id
-//       ratingText
-//       ratingUser
-//       createdAt
-//     }
-//   }
-// `;
+export const ADD_COMMENT = gql`
+  mutation addComment($text: String!, $breweryId: String!, $breweryName: String!) {
+    addComment(text: $text, breweryId: $breweryId, breweryName: $breweryName) {
+      _id
+      text
+      breweryId
+      breweryName
+      user
+      createdAt
+    }
+  }
+`;

@@ -6,6 +6,15 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    comments: [Comment]
+  }
+
+  type Comment {
+    _id: ID
+    text: String
+    breweryId: String
+    breweryName: String
+    user: User
   }
 
   type Auth {
@@ -17,12 +26,13 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     me: User
+    comments: [Comment]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addrating(value: Int): Int
+    addComment(text: String!, breweryId: Int!, breweryName: String!): Comment
   }
 `;
 

@@ -1,12 +1,12 @@
 import React from 'react';
-// import { useQuery } from '@apollo/client';
-// import RatingsList from '../components/RatingsList';
-// import { QUERY_RATINGS } from '../utils/queries';
+import { useQuery } from '@apollo/client';
+import CommentsList from '../components/CommentsList';
+import { QUERY_COMMENTS } from '../utils/queries';
 import '../styles/Card.css';
 
 export default function Home () {
-  // const { loading, data } = useQuery(QUERY_RATINGS);
-  // const ratings = data?.ratings || [];
+  const { loading, data } = useQuery(QUERY_COMMENTS);
+  const comments = data?.comments || [];
 
   return (
     <main>
@@ -21,6 +21,16 @@ export default function Home () {
           <b>BrewFly</b> is a social database website that allows you to search for breweries in your state. <br />
           Connect with your fellow BrewFlies by leaving reviews, display your favorites, and discover new breweries all from one site. 
         </h5>
+      </div>
+      <div>
+          {loading ? (
+            <div>Loading comments...</div>
+          ) : (
+            <CommentsList 
+              comments={comments}
+              title="Comments in database..."
+            />
+          )}
       </div>
     </main>
   );

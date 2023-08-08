@@ -1,5 +1,3 @@
-//import axios from "axios";
-
 const search = async (query) => {
   const response = await fetch(
     `https://brianiswu-open-brewery-db-v1.p.rapidapi.com/breweries?by_state=${query}`,

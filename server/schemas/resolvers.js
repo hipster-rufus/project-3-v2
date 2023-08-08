@@ -1,20 +1,19 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Rating } = require("../models");
+const { User, Comment } = require("../models");
 const { signToken } = require("../utils/auth");
 
 // Map resolvers to query on typedefs
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate("ratings");
+      return User.find().populate("comments");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("ratings");
+      return User.findOne({ username }).populate("comments");
     },
-    // ratings: async (parent, { username }) => {
-    //   const params = username ? { username } : {};
-    //   return Rating.find(params).sort({ createdAt: -1 });
-    // },
+    comments: async () => {
+      return Comment.find();
+    },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
@@ -48,19 +47,21 @@ const resolvers = {
 
       return { token, user };
     },
-    addrating: async (parent, { value }, context) => {
+    addComment: async ({ text, breweryId, breweryName }, context) => {
       if (context.user) {
-        const rating = await Rating.create({
-          value,
+        const rating = await Comment.create({
+          text,
+          breweryId,
+          breweryName,
           user: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { ratings: rating._id } }
+          { $addToSet: { comments: comment._id } }
         );
 
-        return thought;
+        return { comment };
       }
       throw new AuthenticationError("You need to be logged in!");
     },

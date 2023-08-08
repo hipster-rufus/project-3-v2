@@ -10,27 +10,18 @@ export const QUERY_USER = gql`
   }
 `;
 
-// export const QUERY_RATINGS = gql`
-//   query getRatings {
-//     ratings {
-//       _id
-//       value
-//       user
-//       createdAt
-//     }
-//   }
-// `;
-
-// export const QUERY_RATING = gql`
-//   query getRating($ratingId: ID!) {
-//     rating(ratingId: $ratingId) {
-//       _id
-//       value
-//       user
-//       createdAt
-//     }
-//   }
-// `;
+export const QUERY_COMMENTS = gql`
+  query getComments {
+    comments {
+      _id
+      text
+      breweryId
+      breweryName
+      user
+      createdAt
+    }
+  }
+`;
 
 export const QUERY_ME = gql`
   query me {
