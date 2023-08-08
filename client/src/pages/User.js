@@ -37,7 +37,7 @@ export default function User () {
       </h1>
       <div className="intro-card">
         <div>
-          <h5>No ratings yet.</h5>
+          <h5>No comments yet.</h5>
         </div>
       </div>
     </div>

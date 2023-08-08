@@ -20,6 +20,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: "Comment"
+  }]
 });
 
 // Takes care of automatically hashing the user's password before saving it to the databse.
@@ -30,16 +34,6 @@ userSchema.pre("save", async function (next) {
   }
 
   next();
-});
-
-//Associates the rating schema to the user
-userSchema.add({
-  ratings: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Rating",
-    },
-  ],
 });
 
 //checks to see if a given plain text password matches the hashed password.

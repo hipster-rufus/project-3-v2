@@ -62,6 +62,15 @@ export default function Brewery() {
                       hidden
                     />
                   </div>
+                  <div className="form-item row">
+                    <input
+                      className="form-input"
+                      name="breweryName"
+                      type="text"
+                      value={brewery.name}
+                      hidden
+                    />
+                  </div>
                   <button
                     className="form-btn"
                     style={{ cursor: 'pointer' }}
