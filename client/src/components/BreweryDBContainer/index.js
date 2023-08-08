@@ -32,17 +32,6 @@ export default function BreweryDBContainer() {
     setResult(breweries);
   };
 
-  const {
-    id = "",
-    name = "",
-    street = "",
-    city = "",
-    state = "",
-    postal_code = "",
-    phone = "",
-    website_url = "",
-  } = result;
-
   return (
     <div>
       <h1>Breweries</h1>

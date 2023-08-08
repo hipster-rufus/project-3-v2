@@ -31,18 +31,46 @@ export default function Brewery() {
           <h5>Website: <a className="text-info" href={brewery.website_url} >{brewery.website_url}</a>
           </h5>
           <h5>Address: {brewery.street}, {brewery.city}, {brewery.state}</h5>
-          <div id="brewery-rating" className="brew-card text-center">
-            <h5>Have you visited {brewery.name}? Leave a Rating!</h5>
-            <Rating
-              start={0}
-              stop={5}
-              step={1}
-              initialRating={0}
-              readonly={false}
-              direction={"ltr"}
-              fractions={2}
-            />
-          </div>
+              <div className="text-center brew-card p-4">
+              <h5>Have you visited {brewery.name}? Let them know what you think!</h5>
+                <div className="m-3">
+                  <Rating
+                    start={0}
+                    stop={5}
+                    step={1}
+                    initialRating={0}
+                    readonly={false}
+                    direction={"ltr"}
+                    fractions={2}
+                  />
+                </div>
+                <form className='card-body'>
+                  <div className="form-item row m-3">
+                    <textarea
+                      className="form-input"
+                      placeholder="Leave a comment"
+                      name="text"
+                      type="textarea"
+                    />
+                  </div>
+                  <div className="form-item row">
+                    <input
+                      className="form-input"
+                      name="breweryId"
+                      type="text"
+                      value={brewery.id}
+                      hidden
+                    />
+                  </div>
+                  <button
+                    className="form-btn"
+                    style={{ cursor: 'pointer' }}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
         </div>
       </div>
 
