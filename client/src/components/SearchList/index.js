@@ -1,15 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-function SearchList(props) {
+function SearchList({ id, name }) {
   return (
     <div>
-      {props.results.map((result) => (
-        <div className="card" key={result.name}>
-            <h3 className="card-item">{result.name}</h3>
-            <Link to={`/brewery/:${result.id}`}>See details</Link>
-        </div>
-      ))}
+      <div className="card" key={name}>
+        <h3 className="card-item">{name}</h3>
+        <Link to={`/breweries/${id}`}>See details</Link>
+      </div>
     </div>
   );
 }
