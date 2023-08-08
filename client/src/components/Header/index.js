@@ -2,18 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import '../../styles/Header.css';
+import Logo from '../../assets/brewfly-200.svg';
 
 export default function Header () {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
+
   return (
     <header className="mb-4 py-3 flex-row align-center">
       <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <div>
-            <h1 className="header-title m-0 text-center">Brewery App</h1>
-            <p className="header-text m-0 text-center">Tapped into town!</p>
+        <div className="text-center">
+            <img src={ Logo } alt="logo" className="logo"></img>
         </div>
         <div className="navbar justify-content-center">
             <Link className="nav-item m-2" to="/">

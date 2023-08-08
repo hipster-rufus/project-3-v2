@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 // import RatingsList from '../components/RatingsList'
 import Auth from '../utils/auth';
+import '../styles/Card.css';
 
 export default function User () {
   const { username: userParam } = useParams();
@@ -31,12 +32,12 @@ export default function User () {
 
   return (
     <div>
-      <div className="flex-row justify-center mb-3">
-        <h2 className="col-12 col-md-10 mb-5">
-          Welcome to {userParam ? `${user.username}'s` : 'your'} page!
-        </h2>
-        <div className="col-12 col-md-10 mb-5">
-          <p>No ratings yet.</p>
+      <h1>
+        Welcome to {userParam ? `${user.username}'s` : 'your'} page!
+      </h1>
+      <div className="intro-card">
+        <div>
+          <h5>No ratings yet.</h5>
         </div>
       </div>
     </div>
