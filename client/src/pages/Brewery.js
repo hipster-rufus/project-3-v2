@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Rating from "react-rating";
 import { useParams } from "react-router-dom";
+import { ADD_COMMENT } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
 import API from "../utils/API";
+import AuthService from "../utils/API";
 import '../styles/Card.css';
 
 export default function Brewery() {
+  // Fetch single brewery
   const { breweryId } = useParams();
 
   console.log(breweryId);
@@ -22,6 +26,36 @@ export default function Brewery() {
 
   console.log(brewery);
 
+  // POST new comment
+  const [text, setText] = useState('');
+
+  const [addComment] = useMutation(ADD_COMMENT);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const comment = await addComment({
+        variables: {
+          text,
+          breweryId: brewery.id,
+          breweryName: brewery.name,
+          user: AuthService.getUser().data.username,
+        },
+      });
+      setText('');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === 'text') {
+      setText(value);
+    }
+  };
   return (
     <div>
       <div>
@@ -44,13 +78,15 @@ export default function Brewery() {
                     fractions={2}
                   />
                 </div>
-                <form className='card-body'>
+                <form onSubmit={handleFormSubmit} className='card-body'>
                   <div className="form-item row m-3">
                     <textarea
                       className="form-input"
                       placeholder="Leave a comment"
                       name="text"
                       type="textarea"
+                      value={text}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="form-item row">
