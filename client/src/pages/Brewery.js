@@ -29,33 +29,34 @@ export default function Brewery() {
   // POST new comment
   const [text, setText] = useState('');
 
-  const [addComment] = useMutation(ADD_COMMENT);
+  const [addComment, { error }] = useMutation(ADD_COMMENT);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    console.log(text);
     try {
-      const comment = await addComment({
+      const { data } = await addComment({
         variables: {
           text,
           breweryId: brewery.id,
-          breweryName: brewery.name,
-          user: AuthService.getUser().data.username,
+          breweryName: brewery.name
         },
       });
+
       setText('');
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     if (name === 'text') {
       setText(value);
     }
-  };
+  }
+
   return (
     <div>
       <div>
